@@ -1,0 +1,58 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-lg-8 mt-5">
+<div class="d-center">
+  <div class="carousel slide position-relative" data-ride="carousel" [attr.data-interval]="false">
+    <div class="carousel-inner" *ngFor="let picture of dataList; let i = index">
+      <div class="carousel-item" [ngClass]="{'active': currentImageIndex === i}">
+        <button class="btn btn-info btn-star favorites-status position-absolute" *ngIf="picture.isFavorite" (click)="removeFavorite(picture)">
+          <fa-icon
+            [icon]="['fas','star']"
+          />
+        </button>
+          <img
+            loading="eager"
+            [src]="picture.imageUrl"
+            class="d-block carousel-image rounded-4"
+            alt="Slide {{i}}"
+            onerror="this.onerror=null;this.src='/assets/images/on-boarding/select-your-simle.jpg';"
+          />
+          <div class="d-flex justify-content-center align-items-center mt-10 gap-5">
+            <button class="btn btn-secondary history-btn" (click)="backFirst()">
+              <fa-icon [icon]="['fas','history']"/>
+            </button>
+            <button
+              class="btn-prev bg-danger"
+              (click)="prev()"
+            >
+              <fa-icon class="left-btn" [icon]="['fas','chevron-left']" />
+            </button>
+            <button
+              class="btn-next bg-success"
+              (click)="next()"
+            >
+              <fa-icon class="right-btn" [icon]="['fas', 'chevron-right']" />
+            </button>
+            <button class="btn btn-warning btn-star" (click)="addFavorite(picture)" [disabled]="picture.isFavorite">
+              <fa-icon
+                [icon]="['fas','star']"
+              />
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <!-- <div class="col-12 col-lg-3">
+    <div class="single-box py-5 mt-5">
+      <p class="right-side-txt">Boots your account and be seen here</p>
+      <ng-container *ngFor="let slide of rightImage">
+        <img class="right-img m-3" src="{{ slide.img }}" />
+      </ng-container>
+      <button ngbTooltip="Cooming Soon" class="btn btn-secondary mt-2" (click)="subscribeBtn()" >
+        Subscribe
+      </button>
+    </div>
+  </div> -->
+</div>

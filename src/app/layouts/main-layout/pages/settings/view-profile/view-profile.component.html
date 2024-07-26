@@ -1,0 +1,769 @@
+<!-- old view profile -->
+<!-- <div class="profile-picture-area justify-content-center mb-15">
+  <div class="single-box p-5">
+    <div class="col-md-12">
+      <div class="upload-single cover-img">
+        <div class="profile-picture position-relative text-start">
+          <img
+            loading="eager"
+            data-src="{{
+              customer?.CoverPicName || '/assets/images/profile-cover.png'
+            }}"
+            class="preview-image w-100"
+            onerror="this.onerror=null;this.src='/assets/images/profile-cover.png';"
+            alt="Preview Image"
+          />
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-4 profile text-start d-flex align-items-center">
+          <img
+            class="preview-image w-120-px h-120-px"
+            loading="eager"
+            data-src="{{
+              customer?.profilePicName ||
+                '/assets/images/avtar/placeholder-user.png'
+            }}"
+            onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+            alt="Preview Image"
+          />
+          <div class="user-details ms-3">
+            <h3 class="d-flex">
+              {{ customer?.userName }}
+            </h3>
+            <div class="col-md" *ngIf="+profileId === customer.Id">
+              <button
+                class="btn btn-sm cmn-btn float-end d-flex"
+                (click)="openEditProfile()"
+              >
+                <fa-icon [icon]="['fas', 'link']" class="font-14-px me-1" />
+                Privacy and settings
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-8">
+        <div class="page-details">
+          <ul class="nav pt-3 flex-wrap tab-area">
+            <li class="nav-item" role="presentation" (click)="activeTab = 1">
+              <a
+                class="nav-link d-center"
+                [ngClass]="activeTab === 1 ? 'active' : ''"
+                >Posts</a
+              >
+            </li>
+            <li
+              class="nav-item"
+              role="presentation"
+              (click)="activeTab = 2; getCommunities()"
+            >
+              <a
+                class="nav-link d-center"
+                [ngClass]="activeTab === 2 ? 'active' : ''"
+                >Connection
+              </a>
+            </li>
+            <li
+              class="nav-item"
+              role="presentation"
+              (click)="activeTab = 3; getPdfs()"
+            >
+              <a
+                class="nav-link d-center"
+                [ngClass]="activeTab === 3 ? 'active' : ''"
+                >Uploaded Files</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-lg-flex d-block w-100 gap-5 min-vh-100">
+    <div class="flex-column mb-15 w-100">
+      <ng-container *ngIf="activeTab === 1">
+        <app-post-list
+          parentComponent="ViewProfileComponent"
+          [id]="profileId"
+        />
+      </ng-container>
+      <ng-container *ngIf="activeTab === 2">
+        <ng-container *ngIf="communityList.length; else noData">
+          <div class="row">
+            <div
+              class="col-xl-6 col-sm-6"
+              *ngFor="let community of communityList"
+            >
+              <div class="single-box p-5">
+                <div class="avatar-box position-relative">
+                  <img
+                    class="w-100 h-180-px rounded-3"
+                    loading="lazy"
+                    data-src="{{ community.coverImg }}"
+                    alt="avatar"
+                    onerror="this.onerror=null;"
+                  />
+                  <div
+                    class="abs-area w-100 position-absolute top-0 p-3 d-center justify-content-end"
+                  >
+                    <div class="btn-group cus-dropdown dropend">
+                      <div class="btn-group cus-dropdown">
+                        <button
+                          type="button"
+                          class="dropdown-btn"
+                          (click)="openDropDown(community.id)"
+                        >
+                          <fa-icon
+                            [icon]="['fas', 'ellipsis']"
+                            class="font-24-px"
+                          />
+                        </button>
+                        <ul
+                          class="dropdown-menu p-4 pt-2"
+                          [ngClass]="communityId === community.id ? 'show' : ''"
+                          (mouseleave)="communityId = null"
+                        >
+                          <li>
+                            <a
+                              class="droplist d-flex align-items-center gap-2"
+                              (click)="communityId = null"
+                            >
+                              <fa-icon [icon]="['fas', 'trash-can']" />
+                              <span>Delete</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="abs-avatar-item">
+                  <img
+                    class="w-48-px h-48-px m-3 rounded-3"
+                    loading="lazy"
+                    data-src="{{ community.logoImg }}"
+                    alt="avatar"
+                  />
+                </div>
+                <a
+                  ><h6 class="m-0 mb-2 mt-3">
+                    {{ community.CommunityName }}
+                  </h6></a
+                >
+                <p class="smtxt public-group">
+                  {{ community.CommunityDescription }}
+                </p>
+                <div class="d-center btn-border pt-5 gap-2 mt-4">
+                  <button
+                    class="cmn-btn p-2 alt third"
+                    (click)="goToCommunityDetails(community)"
+                  >
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noData>
+          <div>
+            <h6 class="text-center">No Connection</h6>
+          </div>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngIf="activeTab === 3">
+        <ng-container *ngIf="pdfList.length; else noData">
+          <div class="single-box" *ngFor="let item of pdfList">
+            <div class="d-flex p-4 justify-content-between">
+              <div class="d-flex">
+                <div class="avatar-item me-2">
+                  <img
+                    class="avatar-img w-48-px h-48-px rounded-3"
+                    loading="lazy"
+                    data-src="{{
+                      item?.profilePicName ||
+                        '/assets/images/avtar/placeholder-user.png'
+                    }}"
+                    onerror="this.onerror=null;this.src='/assets/images/avtar/placeholder-user.png';"
+                    alt="avatar"
+                  />
+                </div>
+                <div class="single-item notification-area text-area text-start">
+                  <h6 class="m-0 mb-1 d-flex align-items-center">
+                    <a class="cursor" (click)="viewUserPost(item.id)">{{
+                      item?.userName
+                    }}</a>
+                    <span class="smtxt time-schedule ms-1">
+                      <fa-icon class="ms-2" [icon]="['fas', 'clock']" />
+                      {{ item.postcreationdate | dateDay }}</span
+                    >
+                  </h6>
+                  <a
+                    class="ms-1 cursor c-color"
+                    [href]="item?.pdfUrl"
+                    target="_blank"
+                    >{{ item?.pdfName }}</a
+                  >
+                </div>
+              </div>
+
+              <div class="btn-group cus-dropdown d-flex gap-3">
+                <div ngbDropdown class="d-inline-block">
+                  <button class="dropdown-btn" ngbDropdownToggle>
+                    <fa-icon [icon]="['fas', 'ellipsis']" class="font-24-px" />
+                  </button>
+                  <div ngbDropdownMenu class="dropdown-menu">
+                    <button ngbDropdownItem>
+                      <a
+                        class="droplist d-flex align-items-center gap-2"
+                        [appCopyClipboard]="item.pdfUrl"
+                      >
+                        <fa-icon [icon]="['fas', 'link']" />
+                        <span>Copy URL</span>
+                      </a>
+                    </button>
+                    <button ngbDropdownItem>
+                      <a
+                        class="droplist d-flex align-items-center gap-2"
+                        (click)="downloadPdf(item.pdfUrl)"
+                      >
+                        <fa-icon [icon]="['fas', 'download']" />
+                        <span>Download</span>
+                      </a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #noData>
+          <div>
+            <h6 class="text-center">No Files Available</h6>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="(breakpointService?.screen | async).xl.gatherThen">
+      <div class="my-list-sidebar">
+        <app-right-sidebar />
+      </div>
+    </ng-container>
+  </div>
+</div> -->
+
+<!-- New view profile -->
+
+<div class="my-8" *ngIf="!profilePreview">
+  <div class="d-flex justify-content-between">
+    <h5>My Profile</h5>
+    <button class="btn btn-sm cmn-btn" (click)="profilePre()">
+      Preview Profile
+    </button>
+  </div>
+
+  <div class="intrests-box mt-5 p-5">
+    <div class="first-section d-flex justify-content-between">
+      <!-- col-4 -->
+      <div class="d-flex flex-column justify-content-center gap-4 col-12 col-md-3 col-xl-3 col-lg-auto">
+        <div class="d-flex justify-content-between view-border-bottom">
+          <label>Name</label>
+          <h6>{{ customer?.userName || 'Organic user' }}</h6>
+        </div>
+        <div class="d-flex justify-content-between view-border-bottom">
+          <label>Location</label>
+          <h6>{{ customer?.city ? customer.city + ', ' + customer?.country : customer?.country }}</h6>
+        </div>
+        <div class="d-flex justify-content-between view-border-bottom">
+          <label>Birthday</label>
+          <h6>{{ customer?.birthDate | date : "d MMM yyyy" }}</h6>
+        </div>
+      </div>
+
+      <!-- offset-1 col-5 -->
+      <div class="d-center col-12 col-md-5 mt-lg-0 mt-md-0 mt-5 mb-3">
+        <img
+          src="{{ displayImage || customer?.profilePictures?.[0]?.imageUrl }}"
+          class="img-fluid rounded-3"
+        />
+      </div>
+
+      <!-- offset-1 col-1 -->
+      <div
+        class="col-12 col-md-2 d-flex flex-md-column justify-content-center align-items-center mt-lg-0 mt-md-0 mt-5 gap-2"
+      >
+      <div *ngIf="customer.profileId === profileId" class="bg-light text-center d-center h-56-px w-56-px rounded-3 c-pointer" (click)="openModel('Photos')">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+      </div>
+      <div class="d-flex flex-md-column set-max-height text-center gap-2 overflow-y-auto">
+        <div *ngFor="let item of customer.profilePictures">
+          <img src="{{ item.imageUrl }}" class="h-56-px w-56-px rounded-3" (click)="imageChange(item.imageUrl)">
+        </div>
+      </div>
+        <!-- <div class="bg-light text-center p-1 rounded-2 w-50">
+          <fa-icon [icon]="['fas', 'plus']" class="c-pointer"></fa-icon>
+        </div>
+        <div class="bg-light text-center p-1 rounded-2 w-50">
+          <fa-icon [icon]="['fas', 'plus']" class="eye-icon"></fa-icon>
+        </div>
+        <div class="bg-light text-center p-1 rounded-2 w-50">
+          <fa-icon [icon]="['fas', 'plus']" class="eye-icon"></fa-icon>
+        </div>
+        <div class="bg-light text-center p-1 rounded-2 w-50">
+          <fa-icon [icon]="['fas', 'plus']" class="eye-icon"></fa-icon>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="d-flex mt-8">
+    <div class="col-8">
+      <div class="d-flex justify-content-between">
+        <span>Profile Completion</span>
+        <span>20%</span>
+      </div>
+      <div class="mt-3">
+        <ngb-progressbar
+          class="mb-3"
+          type="success"
+          textType="white"
+          [value]="25"
+          [showValue]="true"
+        />
+      </div>
+    </div>
+    <div class="offset-1 col-3 align-self-center text-end">
+      <button class="btn btn-sm cmn-btn">Complete Profile</button>
+    </div>
+  </div> -->
+
+  <div class="mt-8">
+    <div class="d-flex justify-content-around">
+      <button
+        class="basic-info"
+        type="button"
+        (click)="activeTab = 0"
+        [ngClass]="activeTab === 0 ? 'active' : ''"
+      >
+        Basic Info
+      </button>
+      <button
+        class="about-me"
+        type="button"
+        (click)="activeTab = 2"
+        [ngClass]="activeTab === 2 ? 'active' : ''"
+      >
+        Seeking
+      </button>
+      <button
+        class="about-me"
+        type="button"
+        (click)="activeTab = 1"
+        [ngClass]="activeTab === 1 ? 'active' : ''"
+      >
+        About me
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="activeTab === 0">
+    <div class="mt-8 p-5 intrests-box">
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Relationship History</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.relationshipHistory }}</span>
+              <fa-icon
+              *ngIf="customer.profileId === profileId && customer.relationshipHistory !== null"
+                [icon]="['fas', 'pencil']"
+                class="c-pointer"
+                (click)="openModel('Relationship History')"
+              ></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.relationshipHistory === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Relationship History')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Child</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.haveChild }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.haveChild !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Child')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.haveChild === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Child')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Ethnicity</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.ethnicity }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.ethnicity !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Ethnicity')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.ethnicity === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Ethnicity')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Education</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.education }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.education !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Education')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.education === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Education')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Religion</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.religion }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.religion !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Religion')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.religion === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Religion')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Gender</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.gender | uppercase }}</span>
+              <!-- <fa-icon [icon]="['fas', 'pencil']" class="eye-icon" (click)="openModel('Gender')"></fa-icon> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Body Type</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.bodyType }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.bodyType !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Body Type')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.bodyType === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Body Type')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Smoking</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.isSmoke === 'Y' ? 'Yes' : 'No' }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.isSmoke !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Smoking')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.isSmoke === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Smoking')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Looking For</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.relationshipType }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.relationshipType !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Looking For')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.relationshipType === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Looking For')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Height</span>
+            <div class="d-flex gap-3">
+              <span>{{ customer.height }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.height !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Height')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.height === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Height')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 1">
+    <div class="intrests-box single-box mt-8 p-8">
+      <div class="d-flex justify-content-between">
+        <h5 class="text-start">Interests</h5>
+        <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Interests')"></fa-icon>
+      </div>
+      <ng-container *ngIf="customer.interestList.length; else nointerestList">
+        <div class="d-flex flex-row flex-wrap mt-2 gap-3">
+          <div *ngFor="let item of customer.interestList">
+            <span class="itrested-item">{{ item.name }}</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #nointerestList>
+        <h6 class="mt-2">Please finish this step for better match!</h6>
+      </ng-template>
+    </div>
+    <ng-container>
+      <div class="intrests-box single-box mt-8 py-5 px-8">
+        <div class="d-flex justify-content-between">
+          <h5 class="text-start">My Story</h5>
+          <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('My Story')"></fa-icon>
+        </div>
+        <span class="story-area" *ngIf="customer?.idealDate; else noStory"
+      >{{customer.idealDate}}</span>
+      <ng-template #noStory>
+        <div class="story-area">
+          <h5>Please tell your match your story!</h5>
+          <small class="text-danger">Minimum of 20 characters and maximum of 500 characters for better reach</small>
+        </div>
+      </ng-template>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="activeTab === 2">
+    <div class="mt-8 p-5 intrests-box">
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Must be Unvaccinated?</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchIsVaccinated) }}</span>
+              <fa-icon
+              *ngIf="customer.profileId === profileId && customer.matchIsVaccinated !== null"
+                [icon]="['fas', 'pencil']"
+                class="c-pointer"
+                (click)="openModel('Must be Unvaccinated?')"
+              ></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.matchIsVaccinated === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Must be Unvaccinated?')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Can have children?</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchHaveChild) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Can have children?')"></fa-icon>
+              <!-- <button *ngIf="customer.profileId === profileId && customer.matchHaveChild === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Can have children?')">Add</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Preferred Ethinicity</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchEthnicity) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.matchEthnicity !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Preferred Ethinicity')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.matchEthnicity === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Preferred Ethinicity')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Preferred Education</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchEducation) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.matchEducation !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Preferred Education')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.matchEducation === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Preferred Education')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Preferred body Type</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchBodyType) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.matchBodyType !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Preferred body Type')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.matchBodyType === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Preferred body Type')">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Can Smoke?</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchIsSmoke) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Can Smoke?')"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 my-3">
+          <div class="d-flex justify-content-between input-field p-3 rounded-5">
+            <span>Preferred Religion</span>
+            <div class="d-flex gap-3">
+              <span>{{ getStatus(customer.matchReligion) }}</span>
+              <fa-icon *ngIf="customer.profileId === profileId && customer.matchReligion !== null" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Preferred Religion')"></fa-icon>
+              <button *ngIf="customer.profileId === profileId && customer.matchReligion === null" type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="openModel('Preferred Religion')">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="profilePreview">
+  <div class="single-box mt-8">
+    <div class="d-flex row">
+      <div class="user-profile col-12 col-md-8">
+        <ngb-carousel class="line-indicators" #carousel [interval]="0">
+          <ng-template ngbSlide *ngFor="let item of customer.profilePictures">
+            <img class="carousel-custom-image w-100" src="{{ item.imageUrl }}" alt="" />
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div
+      class="user-information w-100 justify-content-center m-5 col rounded-end-4 m-auto"
+    >
+      <div class="user-info d-block py-5">
+        <div class="d-flex justify-content-between" ngbDropdown>
+          <h5 class="">{{ customer.userName }}</h5>
+
+          <!-- <fa-icon
+            ngbDropdownToggle
+            class="dots font-20-px gap-2 me-5 c-pointer"
+            [icon]="['fas', 'ellipsis-v']"
+          />
+
+          <div ngbDropdownMenu class="dropdown-menu w-100-px py-1 me-2">
+            <span ngbDropdownItem>Edit</span>
+          </div> -->
+        </div>
+        <div class="text-start" *ngIf="customer.city">
+          <h5 class="mt-2">
+            <fa-icon
+              class="font-20-px gap-2 card-icon"
+              [icon]="['fas', 'map-location-dot']"
+            />
+            {{ customer?.city ? customer.city + (customer?.state ? ', ' + customer.state : '') : '' }}
+          </h5>
+          <h5 class="">{{ customer?.country }}</h5>
+        </div>
+        <div class="py-5 d-flex flex-column gap-4 px-1 text-start">
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.height"
+          >
+            <fa-icon
+              class="font-20-px gap-2 card-icon"
+              [icon]="['fas', 'child']"
+            />
+            <span class="mx-2"> {{ customer.height }}</span>
+          </div>
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.ethnicity"
+          >
+            <fa-icon
+              class="font-20-px gap-2 card-icon"
+              [icon]="['fas', 'globe']"
+            />
+            <span class="mx-2">
+              {{ customer.ethnicity }} &#9679;
+              {{ customer.religion }}
+            </span>
+          </div>
+
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.isSmoke"
+          >
+            <fa-icon
+              class="font-18-px gap-2"
+              [icon]="['fas', 'smoking']"
+            />
+            <span class="mx-2">
+              {{
+                customer.isSmoke === "N" ? "Doesn't Smoke" : "Yes"
+              }}</span
+            >
+          </div>
+
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.education"
+          >
+            <fa-icon
+              class="font-18-px gap-2"
+              [icon]="['fas', 'graduation-cap']"
+            /><span class="mx-2"> {{ customer.education }}</span>
+          </div>
+
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.relationshipHistory"
+          >
+            <fa-icon
+              class="font-18-px gap-2"
+              [icon]="['fas', 'heart']"
+            /><span class="mx-2">{{
+              customer.relationshipHistory
+            }}</span>
+          </div>
+
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.relationshipType"
+          >
+            <fa-icon
+              class="font-18-px gap-2"
+              [icon]="['fas', 'heart']"
+            /><span class="mx-2">{{ customer.relationshipType }}</span>
+          </div>
+          <div
+            class="d-flex align-items-baseline"
+            *ngIf="customer.haveChild"
+          >
+            <fa-icon
+              class="font-18-px gap-2"
+              [icon]="['fas', 'children']"
+            /><span class="mx-2">{{ customer.haveChild }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="intrests-box single-box mt-8 p-8">
+      <div class="d-flex justify-content-between">
+        <h5 class="text-start">Interests</h5>
+        <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('Interests')"></fa-icon>
+      </div>
+      <ng-container *ngIf="customer.interestList.length; else nointerestList">
+        <div class="d-flex flex-row flex-wrap mt-2 gap-3">
+          <div *ngFor="let item of customer.interestList">
+            <span class="itrested-item">{{ item.name }}</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #nointerestList>
+        <h6 class="mt-2">Please finish this step for better match!</h6>
+      </ng-template>
+    </div>
+    <ng-container>
+      <div class="intrests-box single-box mt-8 py-5 px-8">
+        <div class="d-flex justify-content-between">
+          <h5 class="text-start">My Story</h5>
+          <fa-icon *ngIf="customer.profileId === profileId" [icon]="['fas', 'pencil']" class="c-pointer" (click)="openModel('My Story')"></fa-icon>
+        </div>
+        <span class="story-area" *ngIf="customer?.idealDate; else noStory"
+      >{{customer.idealDate}}</span>
+      <ng-template #noStory>
+        <div class="story-area">
+          <h5>Please tell your match your story!</h5>
+          <small class="text-danger">Minimum of 20 characters and maximum of 500 characters for better reach</small>
+        </div>
+      </ng-template>
+      </div>
+    </ng-container>
+</ng-container>

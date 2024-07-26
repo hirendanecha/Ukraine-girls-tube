@@ -1,0 +1,101 @@
+:host {
+  .text-primary {
+    color: #ff8763 !important;
+  }
+  .chip-group {
+    display: flex;
+
+    .chip {
+      width: 150px;
+      transition: all 0.3s ease-in-out;
+      background-color: var(--box-1st-color);
+      border-radius: 30px;
+      border: 1px solid var(--border-1st-color);
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 6px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+
+      > * {
+        margin-right: 2px;
+        margin-left: 2px;
+        color: var(--heading-1st-color);
+      }
+
+      input {
+        display: none;
+      }
+
+      &.chip-checkbox,
+      &.chip-toggle,
+      &.clickable {
+        cursor: pointer;
+      }
+
+      &.active {
+        background-color: var(--primary-color);
+        border-color: var(--border-1st-color);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+        span {
+          color: var(--section-1st-color);
+        }
+      }
+    }
+
+    .custom-select {
+      option {
+        background: var(--section-1st-color);
+      }
+    }
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .custom-text-color {
+    color: var(--para-2nd-color);
+  }
+
+  .intrests-box {
+    border-radius: 10px;
+    text-align: start;
+    max-height: 264px;
+    overflow-y: auto;
+
+    .itrested-item {
+      background: var(--primary-color);
+      border-radius: 25px;
+      padding: 8px 15px;
+      cursor: pointer;
+
+      &.active {
+        background-color: var(--highlight-2nd-color);
+      }
+    }
+  }
+
+  .progress-bar {
+    border-radius: 10px;
+    background-image: linear-gradient(
+      to right,
+      #28a745 0%,
+      #28a745 15%,
+      #007bff 15%,
+      #007bff 45%,
+      #17a2b8 45%,
+      #17a2b8 65%,
+      #ffc107 65%,
+      #ffc107 100%
+    );
+  }
+
+  ::ng-deep .img-selector {
+    app-img-picker {
+      .img-picker {
+        border: 2px dashed;
+      }
+    }
+  }
+}

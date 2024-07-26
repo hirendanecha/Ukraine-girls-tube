@@ -1,0 +1,171 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .carousel-custom-image {
+    min-height: 500px;
+    max-height: 500px;
+  }
+
+  .connection-slider {
+    ::ng-deep {
+      .carousel {
+        // border-radius: 1rem;
+        .carousel-inner {
+          border-radius: 1rem 0 0 1rem;
+        }
+        @media (max-width: 992px) {
+          .carousel-inner {
+            border-radius: 1rem 1rem 1rem;
+          }
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 40px;
+          opacity: 1;
+
+          span {
+            background-color: var(--primary-color);
+            border-radius: 25px;
+            background-size: 18px;
+            width: 50px;
+            height: 50px;
+            padding: 25px;
+          }
+        }
+
+        .carousel-control-prev {
+          left: -10px;
+        }
+        @media (max-width: 576px) {
+          .carousel-control-prev {
+            left: 0px;
+          }
+        }
+
+        .carousel-control-next {
+          right: -10px;
+        }
+        @media (max-width: 576px) {
+          .carousel-control-next {
+            right: 0px;
+          }
+        }
+      }
+      .user-profile {
+        .line-indicators {
+          .carousel-control-prev {
+            display: none;
+          }
+
+          .carousel-control-next {
+            display: none;
+          }
+        }
+      }
+    }
+    // .user-information {
+    //   padding: 50px 35px;
+    // }
+  }
+  .intrests-box {
+    border-radius: 10px;
+    text-align: start;
+    .itrested-item {
+      background: var(--primary-color);
+      border-radius: 25px;
+      padding: 8px 15px;
+    }
+  }
+  .single-box {
+    .gift-btn {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      // color:var(--body-color)
+      // background-color: white;
+    }
+
+    @media (max-width: 768px) {
+      .gift-btn {
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+      }
+    }
+  }
+
+  .story-area {
+    background: var(--body-color);
+    padding: 10px;
+    border-radius: 7px;
+    width: 100%;
+  }
+}
+
+::ng-deep {
+  .intrests-box {
+    svg path {
+      fill: #ffd3c6 !important;
+    }
+  }
+  .connection-slider {
+    border-radius: 1rem;
+  }
+  .c-icon-color {
+    svg path {
+      fill: var(--secondary-color) !important;
+    }
+  }
+
+  .gift-icon {
+    svg path {
+      fill: var(--body-color);
+    }
+  }
+}
+.input-area {
+  border-radius: 40px;
+  padding: 0 10px !important;
+
+  input {
+    padding: 15px;
+  }
+}
+.msg-section {
+  background-color: var(--section-1st-color);
+  border-radius: 15px;
+}
+.msg-section-icon {
+  font-size: larger;
+  // color: var(--body-color);
+}
+.top-icon {
+  font-size: 24px;
+}
+.btn-down {
+  z-index: 1;
+}
+.user-information {
+  span {
+    font-size: larger;
+  }
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.dropdown-menu {
+  background-color: var(--icon-color) !important;
+  border: 1px solid var(--scroll-color) !important;
+  cursor: pointer !important;
+}
+.itrested-item {
+  color: var(--body-color);
+}
+@media (max-width: 400px) {
+  .user-info {
+    margin: 30px !important;
+  }
+}

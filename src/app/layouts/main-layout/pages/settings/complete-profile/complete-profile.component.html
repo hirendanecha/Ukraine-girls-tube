@@ -1,0 +1,27 @@
+<h3>Complete Profile</h3>
+
+<div class="intrests-box mt-5 p-8 text-center">
+  <div class="d-flex flex-column gap-4">
+    <div class="progress rounded-5">
+      <div class="progress-bar" role="progressbar" [style.width]="progressValue + '%'" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <p class="h4">Your profile is {{ progressValue }}% complete!</p>
+  </div>
+  <p class="py-3">
+    Complete your profile and increase your chances of matching!
+  </p>
+  <div class="mt-5">
+    <p class="m-1">You have {{ stepLeft }} steps remaining:</p>
+    <div class="d-center">
+      <div class="d-flex flex-column gap-5 w-280-px">
+        <div *ngFor="let step of steps" class="d-flex align-items-center option-step rounded-5 p-3 justify-content-between custom-text-color">
+          {{ step }}
+          <button type="button" class="btn cmn-outline-primary rounded-5 py-0" (click)="selectedStep(step)">
+            {{ isDone(step) ? 'Done' : 'Add' }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn cmn-btn mt-8 w-272-px" (click)="completeAllSteps()">Complete All Steps</button>
+  </div>
+</div>

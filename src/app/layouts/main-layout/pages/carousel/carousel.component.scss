@@ -1,0 +1,80 @@
+.favorites-status{
+  top: 10px;
+  z-index: 1;
+  right: 10px;
+}
+.carousel{
+  .carousel-image{
+    width: 400px;
+    height: 400px;
+    @media (max-width:520px) {
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+.btn-prev {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+}
+.btn-next {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+}
+.history-btn{
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+  font-size: 15px;
+}
+.btn-star{
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+  font-size: 15px;
+}
+::ng-deep{
+  .btn-star{
+    svg path{
+      fill: var(--secondary-color) !important;
+    }
+  }
+}
+.main-img{
+  border-radius: 15px;
+
+}
+.slideshow {
+  max-width: 400px;
+  width: 100%;
+  height: 265px;
+  overflow: hidden;
+  margin: 30px auto 0;
+  position: relative;
+
+  img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+.age{
+  z-index: 9;
+}
+.slideshow-controls {
+  margin: 20px auto;
+  width: 146px;
+}
+.right-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+.right-side-txt{
+  font-size: 14px;
+}

@@ -1,0 +1,231 @@
+// .cover-img {
+//   img {
+//     min-height: 300px;
+//     max-height: 300px;
+//   }
+// }
+// .profile {
+//   img {
+//     max-width: 90px;
+//     max-height: 90px;
+//     border-radius: 10px;
+//   }
+// }
+// .list-content {
+//   background: var(--section-1st-color);
+//   border-radius: 15px;
+//   box-shadow: var(--box-shadow);
+//   position: sticky;
+//   top: 115px;
+//   li {
+//     margin-top: 15px;
+//   }
+// }
+// .sidebar-area {
+//   .dashboard-img {
+//     img {
+//       height: 50px;
+//     }
+//   }
+//   .list-unstyled {
+//     padding: 5px;
+//     margin: 10px 0;
+//     border: 1px solid #ccc;
+//     border-radius: 5px;
+//     font-size: 11px;
+//     text-align: center;
+//     display: flex;
+//     li {
+//       padding: 3px;
+//       span {
+//         font-size: 11px;
+//       }
+//     }
+//   }
+//   .dashboard-txt {
+//     span {
+//       font-size: 11px;
+//       line-height: 2;
+//     }
+//   }
+// }
+
+// .profile-picture-area {
+//   .my-profile-sidebar,
+//   .my-list-sidebar {
+//     min-width: 300px;
+//     max-width: 300px;
+//   }
+// }
+
+// .c-color {
+//   color: var(--para-2nd-color);
+// }
+:host{
+  .basic-info {
+    border-bottom: 2px solid var(--para-1st-color);
+  }
+  
+  .about-me {
+    border-bottom: 2px solid var(--para-1st-color);
+  }
+  
+  .active {
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+
+  .set-max-height{
+    max-height: 232px;
+  }
+
+  .view-border-bottom {
+    border-bottom: 1px solid var(--highlight-2nd-color);
+  }
+
+  .cmn-outline-primary {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--primary-color);
+    --bs-btn-active-border-color: var(--primary-color);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--primary-color);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--primary-color);
+    --bs-gradient: none;
+  }
+
+  .img-fluid{
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+
+    @media (min-width: 992px) and (max-width: 1200px) {
+      min-height: 200px;
+      max-height: 200px;
+      min-width: 200px;
+      max-width: 200px;
+    }
+  }
+  
+  .intrests-box {
+    border-radius: 10px;
+    text-align: start;
+    background: var(--section-1st-color);
+    .itrested-item {
+      color: var(--body-color);
+      background: var(--primary-color);
+      border-radius: 25px;
+      padding: 8px 15px;
+    }
+    textarea {
+      resize: none;
+    }
+  }
+
+  .story-area {
+    background: var(--body-color);
+    padding: 10px;
+    border-radius: 7px;
+    width: 100%;
+  }
+  
+  .input-field {
+    background: var(--body-color);
+  }
+  
+  .first-section {
+    @media (max-width: 767px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
+  .carousel-custom-image{
+    min-height: 500px;
+    max-height: 500px;
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+  .dropdown-menu {
+    background-color: var(--icon-color) !important;
+    border: 1px solid var(--scroll-color) !important;
+    cursor: pointer !important;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+  }
+}
+
+::ng-deep {
+  .carousel {
+    // border-radius: 1rem;
+    .carousel-inner {
+      border-radius: 1rem 0 0 1rem;
+    }
+    @media (max-width: 992px) {
+      .carousel-inner {
+        border-radius: 1rem 1rem  1rem;
+      }
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      opacity: 1;
+
+      span {
+        background-color: var(--primary-color);
+        border-radius: 25px;
+        background-size: 18px;
+        width: 50px;
+        height: 50px;
+        padding: 25px;
+      }
+    }
+
+    .carousel-control-prev {
+      left: -10px;
+    }
+    @media (max-width:576px) {
+      .carousel-control-prev{
+        left: 0px;
+      }
+    }
+
+    .carousel-control-next {
+      right: -10px;
+    }
+    @media (max-width:576px) {
+      .carousel-control-next{
+        right: 0px;
+      }
+    }
+  }
+  .user-profile {
+    .line-indicators {
+      .carousel-control-prev {
+        display: none;
+        
+      }
+
+      .carousel-control-next {
+        display: none;
+      }
+    }
+  }
+}
+// .user-information {
+//   padding: 50px 35px;
+// }
+

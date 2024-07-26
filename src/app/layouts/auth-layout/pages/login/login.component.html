@@ -1,0 +1,110 @@
+<div class="row mt-8 main-content m-5 m-lg-0 m-md-5">
+  <div
+    class="login-content col-12 col-md-6 col-lg-3 offset-md-3 offset-lg-8 card rounded-3 p-5"
+  >
+    <div class="d-flex flex-column justify-content-center mt-10">
+      <form
+        id="loginForm"
+        class="form-dark d-flex flex-column"
+        #signInForm="ngForm"
+        [formGroup]="loginForm"
+        (ngSubmit)="signInForm.form.valid && onSubmit()"
+        *ngIf="!isLoggedIn"
+        novalidate
+        autocomplete="none"
+      >
+        <div
+          class="alert alert-{{ type }}"
+          role="alert"
+          *ngIf="errorMessage || msg"
+        >
+          {{ errorMessage || msg }}
+        </div>
+        <div class="mb-3">
+          <label class="form-label"
+            >Email Address <span class="text-danger">*</span></label
+          >
+          <input
+            type="email"
+            class="input-area"
+            required
+            placeholder="Enter Your Email"
+            formControlName="Email"
+            autocomplete="email"
+          />
+          <div
+            class="srv-validation-message text-danger"
+            *ngIf="
+                signInForm.submitted &&
+                   loginForm.controls['Email'].invalid &&
+                   loginForm.controls['Email'].errors?.['required']
+                 "
+          >
+            Email field is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <label class="form-label"
+              >Password<span class="text-danger">*</span></label
+            >
+            <a class="fw-500 c-pointer" (click)="forgotPasswordOpen()"
+              >Forgot Password ?</a
+            >
+          </div>
+          <div class="position-relative custom-input-area">
+            <input
+              type="password"
+              class="input-area"
+              required
+              placeholder="Enter Password"
+              formControlName="Password"
+              #passwordInput
+            />
+            <fa-icon [icon]="passwordHidden ? ['fas', 'eye'] : ['fas', 'eye-slash']" class="font-20-px position-absolute" (click)="togglePasswordVisibility(passwordInput)"></fa-icon>
+          </div>
+          <div
+            class="srv-validation-message text-danger"
+            *ngIf="
+              signInForm.submitted &&
+                 loginForm.controls['Password'].invalid &&
+                 loginForm.controls['Password'].errors?.['required']
+               "
+          >
+            Please enter valid password!
+          </div>
+        </div>
+        <div class="mb-3">
+          <!-- <ng-hcaptcha
+            formControlName="captcha"
+            (verify)="onVerify($event)"
+            (expired)="onExpired($event)"
+            (error)="onError($event)"
+          ></ng-hcaptcha>
+          <div
+            class="text-danger"
+            *ngIf="
+              loginForm.get('captcha').hasError('captcha') &&
+              loginForm.get('captcha').touched
+            "
+          >
+            Captcha required.
+          </div> -->
+          <div id="captcha" #captcha></div>
+        </div>
+        <!-- <div class=""></div> -->
+        <button class="btn cmn-btn my-2 ms-auto w-100 rounded-5" type="submit">
+          Log in
+        </button>
+        <div class="text-center mt-3">
+          <p class="text-danger">
+            If you are having technical issues, email
+            <a href="mailto:support@ukrainiangirls.tube">{{
+              "support@ukrainiangirls.tube"
+            }}</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

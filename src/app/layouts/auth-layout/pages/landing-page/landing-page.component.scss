@@ -1,0 +1,169 @@
+.main-container {
+  height: 100vh;
+  width: 100vw;
+  // background: #11134d;
+
+  .text-s {
+    // font-size: min(max(16px, 1vw), 22px);
+    font-size: 42px;
+    font-weight: 600;
+  }
+  .c-fonts {
+    font-size: min(max(18px, 2vw), 24px);
+    // font-size: 19px;
+    // line-height: 26px;
+    // @media (max-width: 999px) {
+    //   font-size: 16px;
+    // }
+  }
+
+  .custom-height {
+    background-image: url(../../../../../assets/images/landingpage/organic-hm-pg-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover !important;
+    background-position: center;
+    height: 115vh;
+    // background-position: center;
+    // min-height: 400px;
+
+    .banner-text {
+      // display: none;
+      max-width: 600px;
+      width: 100%;
+      background-color: #0b0d0ed4;
+      color: #000000;
+      border-radius: 5px;
+      padding: 40px;
+      height: 300px;
+    }
+
+    @media (max-width: 600px) {
+      min-height: 300px;
+    }
+  }
+  .sub-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+
+    .head-text {
+      font-size: min(max(25px, 2vw), 36px) !important;
+      @media (max-width: 684px) {
+        line-height: 24px;
+      }
+    }
+
+    .sub-text {
+      color: #11134d !important;
+      font-size: min(max(14px, 2vw), 24px);
+    }
+    .c-width {
+      max-width: 722px;
+      // padding: 0 20px;
+      @media (max-width: 684px) {
+        line-height: 24px;
+        padding: 0;
+      }
+    }
+  }
+  .c-footer {
+    max-height: 530px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .footer-txt {
+      color: #fff;
+      font-size: min(max(15px, 2vw), 20px) !important;
+      text-align: center;
+      padding: 0 10px;
+      @media (max-width: 600px) {
+        line-height: 19px;
+      }
+    }
+  }
+}
+// .bg-color {
+//   background: #11134d;
+// }
+.auth-btns {
+  @media (max-width: 560px) {
+    // justify-content: center;
+  }
+}
+
+.landing-btn {
+  .btn-primary {
+    background: #1d9bf0;
+    color: #fff;
+    border: var(--body-color);
+    height: 38px;
+  }
+  .btn-outline {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    height: 38px;
+  }
+}
+
+.main-area {
+  cursor: pointer;
+  position: fixed;
+  width: 300px;
+  top: 0;
+  background: white;
+  right: 0;
+  height: 100vh;
+  z-index: 999;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    display: block;
+  }
+  .c-btn {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 26px;
+    width: 26px;
+    border: 2px solid var(--bs-border-color);
+    border-radius: 50%;
+    padding: 4px;
+
+    svg path {
+      fill: #fff;
+    }
+  }
+  ul {
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0;
+      color: var(--heading-1st-color);
+    }
+
+    li {
+      &:last-child {
+        border-top: 1px solid var(--bs-border-color);
+        border-bottom: 1px solid var(--bs-border-color);
+      }
+
+      // &:first-child {
+      // border-bottom: 1px solid var(--bs-border-color);
+      // }
+    }
+  }
+}
+::ng-deep.c-button-landing {
+  svg path {
+    fill: var(--primary-color);
+  }
+}

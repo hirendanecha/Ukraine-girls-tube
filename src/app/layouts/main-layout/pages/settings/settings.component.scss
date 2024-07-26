@@ -1,0 +1,30 @@
+.main-setting {
+  width: 80%;
+  .intrests-box {
+    border-radius: 10px;
+    text-align: start;
+    background: var(--section-1st-color);
+    padding: 1.25rem;
+    .itrested-item {
+      // background: var(--primary-color);
+      border-radius: 25px;
+      padding: 8px 15px;
+    }
+  }
+
+  .collapsed {
+    display: none !important;
+  }
+
+  ::ng-deep .cmn-btn {
+    fa-icon svg path {
+      fill: #fff;
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .main-setting {
+    width: 100%;
+  }
+}

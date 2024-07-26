@@ -1,0 +1,24 @@
+.main-content {
+  .login-content {
+    background: var(--section-1st-color);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    min-width: 350px;
+    @media (min-width: 992px) and (max-width: 1200px) {
+      right: 50px;
+    }
+  }
+  .custom-input-area {
+    fa-icon{
+      top: 10px;
+      right: 10px;
+      background-color: var(--box-1st-color);
+      border-radius: 50%;
+      height: 36px;
+      width: 36px;
+      text-align: -webkit-center;
+      align-content: center;
+      cursor: pointer;
+    }
+  }
+}

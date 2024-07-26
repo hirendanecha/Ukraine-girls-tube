@@ -1,0 +1,228 @@
+<!-- <ng-container>
+  <div class="d-flex align-items-center justify-content-center h-75">
+    <div class="text-center">
+      <img src="/assets/images/default/discoverPeople.png" class="h-152-px" />
+      <p class="mt-10">You don't have any connections yet.</p>
+      <button class="btn cmn-btn mt-15" routerLink="/home">Discover New People</button>
+    </div>
+  </div>
+</ng-container> -->
+
+<ng-container *ngIf="profileList.length">
+  <div class="connection-slider rounded-4">
+    <ngb-carousel
+      [showNavigationIndicators]="false"
+      [interval]="0"
+      (slide)="getNextPageGroupPostsById($event)"
+    >
+      <ng-container
+        *ngFor="let profile of profileList; let i = index; let l = last"
+      >
+        <ng-template ngbSlide>
+          <div
+            class="single-box d-flex row w-100 justify-content-start rounded-4 m-0 mb-0"
+          >
+            <div class="user-profile col-12 col-lg-8 p-0">
+              <ngb-carousel
+                class="line-indicators"
+                [id]="i"
+                [showNavigationIndicators]="
+                  profile.profilePictures.length > 0 ? true : false
+                "
+              >
+                <ng-template
+                  ngbSlide
+                  *ngFor="let img of addDefaultImageIfNeeded(profile)"
+                >
+                  <img
+                    class="carousel-custom-image w-100 rounded-start-4 main-img"
+                    [src]="img.imageUrl"
+                    alt="Random slide"
+                  />
+                </ng-template>
+              </ngb-carousel>
+            </div>
+
+            <div
+              class="user-information w-100 justify-content-center m-5 col rounded-end-4 m-auto ps-5"
+            >
+              <div class="user-info d-block py-5">
+                <div class="d-flex justify-content-between" ngbDropdown>
+                  <h5 class="">{{ profile.userName }}</h5>
+
+                  <fa-icon
+                    ngbDropdownToggle
+                    class="dots font-20-px gap-2 me-5"
+                    [icon]="['fas', 'ellipsis-v']"
+                  />
+
+                  <div ngbDropdownMenu class="dropdown-menu w-100-px py-1 me-2">
+                    <span ngbDropdownItem class="">Report</span>
+                  </div>
+                </div>
+                <div class="text-start" *ngIf="profile.city">
+                  <h5 class="mt-2">
+                    <fa-icon
+                      class="font-20-px gap-2 card-icon"
+                      [icon]="['fas', 'map-location-dot']"
+                    />
+                    {{ profile.city }}, {{ profile.country }}
+                  </h5>
+                </div>
+                <div class="py-5 d-flex flex-column gap-4 px-1 text-start">
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.height"
+                  >
+                    <fa-icon
+                      class="font-20-px gap-2 card-icon"
+                      [icon]="['fas', 'child']"
+                    />
+                    <span class="mx-2"> {{ profile.height }}</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.ethnicity"
+                  >
+                    <fa-icon
+                      class="font-20-px gap-2 card-icon"
+                      [icon]="['fas', 'globe']"
+                    />
+                    <span class="mx-2">
+                      {{ profile.ethnicity }} &#9679;
+                      {{ profile.religion }}
+                    </span>
+                  </div>
+
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.isSmoke"
+                  >
+                    <fa-icon
+                      class="font-18-px gap-2"
+                      [icon]="['fas', 'smoking']"
+                    />
+                    <span class="mx-2">
+                      {{
+                        profile.isSmoke === "N" ? "Doesn't Smoke" : "Yes"
+                      }}</span
+                    >
+                  </div>
+
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.education"
+                  >
+                    <fa-icon
+                      class="font-18-px gap-2"
+                      [icon]="['fas', 'graduation-cap']"
+                    /><span class="mx-2"> {{ profile.education }}</span>
+                  </div>
+
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.relationshipHistory"
+                  >
+                    <fa-icon
+                      class="font-18-px gap-2"
+                      [icon]="['fas', 'heart']"
+                    /><span class="mx-2">{{
+                      profile.relationshipHistory
+                    }}</span>
+                  </div>
+
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.relationshipType"
+                  >
+                    <fa-icon
+                      class="font-18-px gap-2"
+                      [icon]="['fas', 'heart']"
+                    /><span class="mx-2">{{ profile.relationshipType }}</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-baseline"
+                    *ngIf="profile.haveChild"
+                  >
+                    <fa-icon
+                      class="font-18-px gap-2"
+                      [icon]="['fas', 'children']"
+                    /><span class="mx-2">{{ profile.haveChild }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </ngb-carousel>
+  </div>
+  <div class="mt-5 p-5 mb-5 single-box">
+    <div class="d-flex justify-content-around gap-2 gap-sm-4">
+      <button
+        class="intrests-box btn cmn-btn d-flex gap-3"
+        (click)="SendMessageInpt(profileList[currentIndex], 'video call')"
+      >
+        <fa-icon class="msg-section-icon" [icon]="['fas', 'phone']" />
+        Make Video Call
+      </button>
+      <button
+        class="intrests-box btn cmn-btn d-flex gap-3"
+        (click)="SendMessageInpt(profileList[currentIndex],'chat')"
+      >
+        <fa-icon class="msg-section-icon" [icon]="['fas', 'message']" />
+        Send Message
+      </button>
+      <button
+        class="intrests-box btn cmn-btn d-flex gap-3"
+        (click)="unsubscribe(profileList[currentIndex])"
+        >
+        <!-- (click)="SendMessageInpt(profileList[currentIndex])" -->
+        <fa-icon class="msg-section-icon" [icon]="['fas', 'ban']" />
+        Block
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="intrests-box single-box p-8"
+    *ngIf="profileList[currentIndex]?.interestList?.length"
+  >
+    <h5 class="text-start">Interests</h5>
+    <div class="d-flex flex-row flex-wrap mt-5 gap-3">
+      <div *ngFor="let item of profileList[currentIndex]?.interestList">
+        <span class="itrested-item">{{ item.name }}</span>
+      </div>
+    </div>
+  </div>
+  <ng-container>
+    <div class="story-box single-box h-156-px p-8">
+      <h4 class="text-start">My Story</h4>
+      <p
+        class="text-start mt-5 story-area"
+        *ngIf="profileList[currentIndex]?.idealDate"
+      >
+        {{ profileList[currentIndex]?.idealDate }}
+      </p>
+      <p
+        class="text-start mt-5 story-area"
+        *ngIf="!profileList[currentIndex]?.idealDate"
+      >
+        Not yet completed!
+      </p>
+    </div>
+  </ng-container>
+
+  <!-- <div class="story-box single-box h-156-px p-8">
+    <h4 class="text-start">Perfect Match</h4>
+    <p class="text-start mt-5">I teach learn and pursue music proffesionally</p>
+  </div> -->
+
+  <!-- <div
+    class="story-box single-box h-156-px p-8"
+    *ngIf="profileList[currentIndex]?.idealDate"
+  >
+    <h4 class="text-start">Ideal Date</h4>
+    <p class="text-start mt-5">{{ profileList[currentIndex]?.idealDate }}</p>
+  </div> -->
+</ng-container>

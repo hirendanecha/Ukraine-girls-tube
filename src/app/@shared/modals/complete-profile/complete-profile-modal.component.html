@@ -1,0 +1,170 @@
+<div class="modal-header">
+  <div class="d-flex gap-2">
+    <div class="progress w-300-px rounded-5">
+      <div class="progress-bar" role="progressbar" [style.width]="progressValue + '%'" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <p class="m-0 d-none d-sm-flex font-12-px">{{ progressValue }}% complete!</p>
+  </div>
+  
+  <fa-icon [icon]="['fas', 'xmark']" class="font-20-px" role="button" (click)="activeModal.close()" />
+</div>
+
+<div class="modal-body">
+  <div class="d-flex flex-column align-items-center">
+    <img [src]="'/assets/images/on-boarding/header/' + getImageName(title)" class="h-40-px w-40-px mb-3">
+    <h2>{{ title }}</h2>
+  </div>
+  
+  <ng-container *ngIf="title === 'Photos'">
+    <p class="fs-subtitle">
+      Make your profile stand out with a photo that captures your
+      uniqueness
+    </p>
+    <div class="d-flex justify-content-around flex-wrap">
+    <div class="carousel slide" data-ride="carousel" [attr.data-interval]="false">
+      <div class="carousel-inner">
+        <ng-container *ngFor="let imageUrl of profilePics; let i = index">
+          <div class="carousel-item" [ngClass]="{'active': currentImageIndex === i}">
+            <img
+              loading="eager"
+              [src]="imageUrl"
+              class="d-block h-200-px w-200-px rounded-4"
+              alt="Slide {{i}}"
+              onerror="this.onerror=null;this.src='/assets/images/on-boarding/select-your-simle.jpg';"
+            />
+          </div>
+        </ng-container>
+      </div>
+      <a class="carousel-control-prev" role="button" (click)="prev()">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" role="button" (click)="next()">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </div>
+    <div class="img-selector d-center mt-5">
+      <div class="d-flex flex-column">
+        <h4>Select Photo</h4>
+        <app-img-picker (onFileChange)="selectFiles($event)" />
+      </div>
+    </div>
+    <div class="d-center m-5">
+      <button type="button" class="btn btn-sm cmn-btn w-200-px" (click)="uploadImage()">
+        {{ confirmButtonLabel }}
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="title === 'Relationship History'">
+    <div class="d-center">
+      <div
+        class="d-flex flex-column gap-3 chip-group"
+        tabindex="-1"
+        role="radiogroup"
+      >
+        <div
+          *ngFor="let option of relationOptions"
+          (click)="relationStatus(option)"
+          [ngClass]="statusofRelation === option ? 'active' : ''"
+          class="chip chip-checkbox justify-content-center w-268-px"
+          tabindex="0"
+          role="radio"
+          aria-checked="false"
+          [attr.id]="generateId(option)"
+        >
+          <input type="radio" name="radioEx" />
+          <span [attr.id]="'radioTwoLabel_' + generateId(option)">{{
+            option
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>   
+
+  <ng-container *ngIf="title === 'Industry'">
+    <h3 class="text-center">Coming Soon!</h3>
+  </ng-container>
+
+  <ng-container *ngIf="title === 'My Story'">
+    <h5 class="text-center">Please tell your match your story!</h5>
+    <textarea
+    cols="30"
+    rows="8"
+    placeholder="start typing..."
+    [(ngModel)]="idealText"
+    #idealTextCtrl="ngModel" required minlength="20" maxlength="500" 
+  ></textarea>
+  <div *ngIf="idealTextCtrl.invalid && (idealTextCtrl.dirty || idealTextCtrl.touched)">
+    <div *ngIf="idealTextCtrl.errors.required" class="text-danger">Minimum of 20 characters and maximum of 500 characters required</div>
+    <div *ngIf="idealTextCtrl.errors.minlength" class="text-danger">Minimum length is 20 characters.</div>
+  </div>
+  <span class="text-danger">{{idealText?.length || 0}} / 500</span>
+  <div class="d-center m-5">
+    <button type="button" class="btn btn-sm cmn-btn w-200-px" [disabled]="!idealTextCtrl.valid" (click)="submitIdealText()">
+      {{ confirmButtonLabel }}
+    </button>
+  </div>
+  </ng-container>
+
+  <ng-container *ngIf="title === 'Body Type'">
+    <div class="d-center">
+      <div
+        class="d-flex flex-column gap-3 chip-group"
+        tabindex="-1"
+        role="radiogroup"
+      >
+        <div
+          *ngFor="let option of bodyTypeOptions"
+          (click)="bodyType(option)"
+          [ngClass]="statusofBody === option ? 'active' : ''"
+          class="chip chip-checkbox justify-content-center w-268-px"
+          tabindex="0"
+          role="radio"
+          aria-checked="false"
+          [attr.id]="generateId(option)"
+        >
+          <input type="radio" name="radioEx" />
+          <span [attr.id]="'radioTwoLabel_' + generateId(option)">{{
+            option
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="title === 'Interests'">
+    <p class="text-center">You can select up to 30 interests.</p>
+    <p class="text-center text-primary">Interests ({{selectedInterests.length}})</p>
+    <div class="intrests-box single-box">
+        <div class="d-flex flex-row flex-wrap mt-2 gap-3">
+          <div *ngFor="let item of interests">
+            <span 
+              class="itrested-item p-2 text-white" 
+              (click)="onClickInterest(item.id)" 
+              [ngClass]="{'active': isSelected(item.id)}">
+              {{ item.name }}
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class="d-center m-5">
+      <button type="button" class="btn btn-sm cmn-btn w-200-px" (click)="submitInterests()">
+        {{ confirmButtonLabel }}
+      </button>
+    </div>
+  </ng-container>
+  
+</div>
+
+<!-- <div class="modal-footer justify-content-end gap-2">
+  <button type="button" class="btn btn-sm btn-danger" (click)="activeModal.close('cancel')">
+    {{ cancelButtonLabel }}
+  </button>
+
+  <button type="button" class="btn btn-sm btn-secondary" (click)="activeModal.close('success')">
+    {{ confirmButtonLabel }}
+  </button>
+</div> -->

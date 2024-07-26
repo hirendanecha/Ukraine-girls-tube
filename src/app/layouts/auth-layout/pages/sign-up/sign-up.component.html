@@ -1,0 +1,234 @@
+<div class="row mt-8 main-content m-2 m-sm-5 m-lg-0 m-md-5">
+  <div
+    class="sign-up-content col-12 col-md-6 col-lg-3 offset-md-3 offset-lg-8 card rounded-3 p-5"
+  >
+    <form
+      class="form-dark d-flex flex-column"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div
+        class="alert alert-{{ type }}"
+        role="alert"
+        *ngIf="registrationMessage || msg"
+      >
+        {{ registrationMessage || msg }}
+      </div>
+      <!-- <div class="row"> -->
+      <div class="gender d-flex flex-column mb-3">
+        <label class="form-label form-label-transform"
+          >I'm a<span class="text-danger">*</span></label
+        >
+        <div class="d-flex justify-content-around">
+          <div class="chip-group" tabindex="-1" role="radiogroup">
+            <div
+              (click)="changeGender('woman')"
+              class="chip chip-checkbox justify-content-center"
+              tabindex="0"
+              role="radio"
+              [ngClass]="whatIm === 'woman' ? 'active' : ''"
+              aria-checked="false"
+            >
+              <input type="radio" name="radioEx" />
+              <span id="radioOneLabel">Woman</span>
+            </div>
+            <div
+              (click)="changeGender('man')"
+              [ngClass]="whatIm === 'man' ? 'active' : ''"
+              class="chip chip-checkbox justify-content-center"
+              tabindex="0"
+              role="radio"
+              aria-checked="false"
+            >
+              <input type="radio" name="radioEx" />
+              <span id="radioTwoLabel">Man</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"
+          >Birthday<span class="text-danger">*</span></label
+        >
+        <div class="d-flex justify-content-around">
+          <div class="">
+            <!-- Date dropdown -->
+            <select
+              class="custom-select"
+              id="dateSelect"
+              formControlName="dateSelect"
+              (change)="onDateMonthYearChange('dateSelect')"
+            >
+              <option selected disabled value="">Day</option>
+              <option *ngFor="let date of dates" [value]="date">
+                {{ date }}
+              </option>
+            </select>
+          </div>
+          <div class="">
+            <!-- Month dropdown -->
+            <select
+              class="custom-select"
+              id="monthSelect"
+              formControlName="monthSelect"
+              (change)="onDateMonthYearChange('monthSelect')"
+            >
+              <option selected disabled value="">Month</option>
+              <option
+                *ngFor="let month of months; let i = index"
+                [value]="i + 1"
+              >
+                {{ month }}
+              </option>
+            </select>
+          </div>
+          <div class="">
+            <!-- Year dropdown -->
+            <select
+              class="custom-select"
+              id="yearSelect"
+              formControlName="yearSelect"
+              (change)="onDateMonthYearChange('yearSelect')"
+            >
+              <option selected disabled value="">Year</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"
+          >Full Name<span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          name="fullname"
+          class="input-area"
+          required
+          placeholder="Enter your Full Name"
+          formControlName="fullname"
+          autocomplete="false"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('fullname').hasError('required') &&
+            registerForm.get('fullname').touched
+          "
+        >
+          Please enter Full Name.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label"
+          >Email Address<span class="text-danger">*</span></label
+        >
+        <input
+          type="email"
+          name="Email"
+          class="input-area"
+          required
+          placeholder="Enter your email"
+          formControlName="Email"
+          autocomplete="Email"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('Email').hasError('required') &&
+            registerForm.get('Email').touched
+          "
+        >
+          Please enter valid Email.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"
+          >Password<span class="text-danger">*</span></label
+        >
+        <div class="position-relative custom-input-area">
+          <input
+            type="password"
+            class="input-area"
+            required
+            name="password"
+            placeholder="Enter your password"
+            (input)="changetopassword($event)"
+            (keyup)="changetopassword($event)"
+            formControlName="Password"
+            autocomplete="new-password"
+            #passwordInput
+          />
+          <fa-icon [icon]="passwordHidden ? ['fas', 'eye'] : ['fas', 'eye-slash']" class="font-20-px position-absolute" (click)="togglePasswordVisibility(passwordInput)"></fa-icon>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('Password').hasError('required') &&
+            registerForm.get('Password').touched
+          "
+        >
+          Please enter valid Password.
+        </div>
+      </div>
+      <div class="mb-3">
+        <div id="captcha" #captcha></div>
+        <!-- <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('captcha').hasError('captcha') &&
+            registerForm.get('captcha').touched
+          "
+        >
+          Captcha required.
+        </div> -->
+      </div>
+
+      <!-- <div class="col-12 col-md-6 mb-3">
+          <label class="form-label">Confirm Password<span class="text-danger">*</span></label>
+          <input type="password" class="input-area" required name="confirmPassword" placeholder="Enter confirm password"
+            (focusout)="validatepassword()" (input)="changetopassword($event)" (keyup)="changetopassword($event)"
+            formControlName="confirm_password" autocomplete="new-password" />
+          <div class="text-danger" *ngIf="
+              registerForm.get('confirm_password').hasError('required') &&
+              registerForm.get('confirm_password').touched
+            ">
+            Password is not matched.
+          </div>
+        </div> -->
+
+      <!-- <div class="col-12 col-md-6 mb-3">
+          <label class="form-label">Country<span class="text-danger">*</span></label>
+          <select id="Country" required name="Country" class="input-area w-100"
+            formControlName="Country">
+            <option [value]="defaultCountry">United states</option>
+            <option [value]="item.country_code" *ngFor="let item of allCountryData">
+              {{ item.country }}
+            </option>
+          </select>
+        </div> -->
+      <!-- </div> -->
+      <div class="">
+        <button
+          class="btn cmn-btn my-2 rounded-5 w-100"
+          type="submit"
+          [disabled]="!registerForm.valid"
+        >
+          Sign Up
+        </button>
+      </div>
+      <div class="text-center mt-3">
+        <p class="text-danger">
+          If you are having technical issues, email
+          <a href="mailto:support@ukrainiangirls.tube">{{
+            "support@ukrainiangirls.tube"
+          }}</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
