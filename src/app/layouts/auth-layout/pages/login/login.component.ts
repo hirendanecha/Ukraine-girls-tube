@@ -67,10 +67,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.type = 'success';
     }
     const data = {
-      title: 'Organic-Login',
+      title: 'UkrainianGirls-Login',
       url: `${environment.webUrl}login`,
       description: 'login page',
-      image: `${environment.webUrl}assets/images/landingpage/OD-default-profile-banner.png`,
+      image: `${environment.webUrl}assets/images/landingpage/ukraine-girl-banner.png`,
     };
     this.theme = localStorage.getItem('theme');
     this.seoService.updateSeoMetaData(data);
@@ -116,12 +116,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
-    const token = localStorage.getItem('captcha-token');
-    if (!token) {
-      this.msg = 'Invalid captcha kindly try again!';
-      this.type = 'danger';
-      return;
-    }
+    // const token = localStorage.getItem('captcha-token');
+    // if (!token) {
+    //   this.msg = 'Invalid captcha kindly try again!';
+    //   this.type = 'danger';
+    //   // return;
+    // }
     this.spinner.show();
     this.authService.customerlogin(this.loginForm.value).subscribe({
       next: (data: any) => {

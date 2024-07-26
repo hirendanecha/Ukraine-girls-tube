@@ -86,9 +86,9 @@ export function app(): express.Express {
         var seo: any = {
           title: 'UkrainianGirls.tube',
           description:
-            'Find like minded male or female unvaccinated organic humans!',
+            'Find like minded male or female unvaccinated UkrainianGirls humans!',
           image:
-            'https://www.ukrainiangirls.tube/assets/images/landingpage/OD-default-profile.png',
+            'https://www.ukrainiangirls.tube/assets/images/landingpage/UkrainianGirl-Square.png',
           site: 'https://www.ukrainiangirls.tube/',
           url: 'https://www.ukrainiangirls.tube' + params,
           keywords: 'UkrainianGirls.tube',
@@ -101,7 +101,7 @@ export function app(): express.Express {
           id = id[id.length - 1];
           // id = params[params.length - 1];
           // id = Number(id);
-          // let id = 'local-organic-food-sources';
+          // let id = 'local-UkrainianGirls-food-sources';
           console.log({ id });
 
           // if (!isNaN(id) || Math.sign(id) > 0) {
@@ -123,7 +123,7 @@ export function app(): express.Express {
           id = +id[id.length - 1];
           // id = params[params.length - 1];
           // id = Number(id);
-          // let id = 'local-organic-food-sources';
+          // let id = 'local-UkrainianGirls-food-sources';
           // console.log({ id });
 
           // if (!isNaN(id) || Math.sign(id) > 0) {
@@ -144,7 +144,7 @@ export function app(): express.Express {
           id = id[id.length - 1];
           // id = params[params.length - 1];
           // id = Number(id);
-          // let id = 'local-organic-food-sources';
+          // let id = 'local-UkrainianGirls-food-sources';
           console.log({ id });
 
           // if (!isNaN(id) || Math.sign(id) > 0) {
@@ -160,7 +160,7 @@ export function app(): express.Express {
               post?.thumbfilename ||
               post?.metaimage ||
               post?.imageUrl ||
-              'https://www.ukrainiangirls.tube/assets/images/landingpage/OD-default-profile.png',
+              'https://www.ukrainiangirls.tube/assets/images/landingpage/UkrainianGirl-Square.png',
           };
           seo.title = talent.name;
           seo.description = strip_html_tags(talent.description);

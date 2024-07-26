@@ -36,7 +36,7 @@ import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    BrowserModule.withServerTransition({ appId: 'OrganicDating' }),
+    BrowserModule.withServerTransition({ appId: 'UkrainianGirlsDating' }),
     BrowserAnimationsModule,
     TransferHttpCacheModule,
     AuthLayoutModule,

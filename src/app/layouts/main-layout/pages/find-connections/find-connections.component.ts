@@ -38,7 +38,7 @@ export class ConnectionsComponent implements OnInit {
     private toastService: ToastService
   ) {
     const data = {
-      title: 'Organic-Connections',
+      title: 'UkrainianGirls-Connections',
       url: `${location.href}`,
       description: '',
     };
@@ -95,7 +95,7 @@ export class ConnectionsComponent implements OnInit {
     if (!profile.profilePictures || profile.profilePictures.length === 0) {
       profile.profilePictures = [
         {
-          imageUrl: '/assets/images/landingpage/OD-default-profile.png',
+          imageUrl: '/assets/images/landingpage/UkrainianGirl-Square.png',
         },
       ];
     }

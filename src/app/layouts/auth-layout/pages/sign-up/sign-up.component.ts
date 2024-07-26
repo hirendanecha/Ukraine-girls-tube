@@ -78,10 +78,10 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     private tokenStorageService: TokenStorageService
   ) {
     const data = {
-      title: 'Organic-Registration',
+      title: 'UkrainianGirls-Registration',
       url: `${environment.webUrl}register`,
       description: 'Registration page',
-      image: `${environment.webUrl}assets/images/landingpage/OD-default-profile-banner.png`,
+      image: `${environment.webUrl}assets/images/landingpage/ukraine-girl-banner.png`,
     };
     this.seoService.updateSeoMetaData(data);
     this.theme = localStorage.getItem('theme');
@@ -148,13 +148,13 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   onSubmit(): void {
     this.msg = '';
-    const token = localStorage.getItem('captcha-token');
-    if (!token) {
-      this.msg = 'invalid captcha please kindly try again!';
-      this.type = 'danger';
-      this.scrollTop();
-      return;
-    }
+    // const token = localStorage.getItem('captcha-token');
+    // if (!token) {
+    //   this.msg = 'invalid captcha please kindly try again!';
+    //   this.type = 'danger';
+    //   this.scrollTop();
+    //   return;
+    // }
     if (this.registerForm.valid) {
       this.spinner.show();
       const data = {

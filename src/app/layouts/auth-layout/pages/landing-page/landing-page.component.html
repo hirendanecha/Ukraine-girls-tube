@@ -1,8 +1,8 @@
 <div class="main-container">
   <nav class="navbar navbar-light px-6 px-sm-10 auth-btns">
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column c-pointer" routerLink="/">
       <img
-        src="/assets/images/landingpage/OD-default-profile.png"
+        src="/assets/images/landingpage/UkrainianGirl.tube.png"
         class="h-60-px pt-2"
         alt=""
       />
@@ -11,15 +11,15 @@
       <fa-icon [icon]="['fas', 'bars']" (click)="mobileMenu()" />
     </div>
     <div class="landing-btn d-none d-md-block d-lg-block">
+      <!-- *ngIf="!isLogin" -->
       <button
-        *ngIf="!isLogin"
         class="btn cmn-btn third w-80-px rounded-5"
         (click)="openLoginPage()"
       >
         Login
       </button>
+      <!-- *ngIf="isLogin" -->
       <button
-        *ngIf="isLogin"
         class="btn btn-outline alt third w-80-px ms-2 rounded-5"
         (click)="openSignPage()"
       >
@@ -27,32 +27,30 @@
       </button>
     </div>
   </nav>
-
+  <div class="custom-mobile-height" *ngIf="isInnerWidthSmall && (isLogin || isRegister)" (click)="closeMenu()">
+    <div class="main-banner p-2 w-75 m-auto position-relative">
+      <!-- <span class="d-flex flex-column align-items-center">
+        <p class=" c-fonts mt-3 mb-0">UkrainianGirls.tube</p>
+        <p class="c-fonts my-3 mb-0">Find unvaccinated singles worldwide within a social setting
+          complete with optional video chat</p>
+      </span> -->
+    </div>
+  </div>
   <div (click)="closeMenu()">
-    <div class="d-flex flex-column py-10 custom-height">
+    <div class="d-flex flex-column py-10" [ngClass]="!isInnerWidthSmall || (!isLogin && !isRegister) ? 'custom-height' : ''">
       <div class="container">
-        <div class="row m-0 justify-content-start offset-0">
-          <div class="col-md-6">
-            <span class="text-left mt-3">
-              <h1 class="text-dark text-s">ukrainiangirls.tube</h1>
-            </span>
-            <!-- <span class="pb-4">
-            <i class="text-white text-s">No AI and we DO NOT sell your data</i>
-          </span> -->
-            <span class="text-dark c-fonts text-start mt-4">
-              Find unvaccinated singles worldwide within a social setting
-              complete with optional video chat
-            </span>
-            <!-- <span class="text-white c-fonts py-6 mt-10 text-center"
-            >Social Discussion on how to heal various ailments</span
-          > -->
-          </div>
+        <div class="main-banner banner-text p-2 p-sm-4 col-md-6" *ngIf="!isLogin && !isRegister">
+          <span class="d-flex flex-column align-items-center">
+            <h1 class="my-2 text-s">UkrainianGirls.tube</h1>
+            <p class="c-fonts my-3 mb-0">Find unvaccinated singles worldwide within a social setting
+              complete with optional video chat</p>
+          </span>
         </div>
       </div>
       <ng-container *ngIf="isLogin">
         <app-login></app-login>
       </ng-container>
-      <ng-container *ngIf="!isLogin">
+      <ng-container *ngIf="isRegister">
         <app-sign-up></app-sign-up>
       </ng-container>
     </div>

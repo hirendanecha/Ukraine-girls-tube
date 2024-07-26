@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, NgZone, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerService } from 'src/app/@shared/services/customer.service';
@@ -12,6 +12,9 @@ import { TokenStorageService } from 'src/app/@shared/services/token-storage.serv
 export class LandingPageComponent {
   mobileMenuToggle: boolean = false;
   isLogin: boolean = false;
+  isRegister: boolean = false;
+  isInnerWidthSmall: boolean;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -19,7 +22,8 @@ export class LandingPageComponent {
     private el: ElementRef,
     private customerService: CustomerService,
     private tokenStorageService: TokenStorageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private ngZone: NgZone
   ) {
     const path = this.route.snapshot.routeConfig.path;
     if (path === 'logout') {
@@ -27,8 +31,17 @@ export class LandingPageComponent {
     } else if (this.tokenStorageService.getToken()) {
       this.router.navigate(['/home']);
     }
-    this.isLogin = this.route.snapshot.routeConfig.path === 'login' || false;
-    console.log('Constructor');
+    this.isLogin = this.route.snapshot.routeConfig.path === 'login';
+    this.isRegister = this.route.snapshot.routeConfig.path === 'register';
+    this.isInnerWidthSmall = window.innerWidth < 768;
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('resize', this.onResize.bind(this));
+    });
+  }
+  onResize() {
+    this.ngZone.run(() => {
+      this.isInnerWidthSmall = window.innerWidth < 768;
+    });
   }
 
   openLoginPage(): void {

@@ -5,8 +5,8 @@ import { LandingPageComponent } from './layouts/auth-layout/pages/landing-page/l
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'register',
-    // component: LandingPageComponent,
+    // redirectTo: 'register',
+    component: LandingPageComponent,
     pathMatch: 'full',
   },
   {

@@ -69,7 +69,7 @@ export class SeoService {
     }
 
     if (!tagValue.image) {
-      tagValue.image = 'https://ukrainiangirls.tube/assets/images/banner/Healing-Tube-Logo.png';
+      tagValue.image = 'https://ukrainiangirls.tube/assets/images/banner/ukraine-girl-banner.png';
     }
 
     this.meta.updateTag({

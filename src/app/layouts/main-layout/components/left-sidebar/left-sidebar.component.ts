@@ -94,7 +94,7 @@ export class LeftSidebarComponent implements OnInit {
 
   notificationNavigation() {
     this.closeSidebar();
-    this.originalFavicon.href = '/assets/images/landingpage/OD-default-profile.png';
+    this.originalFavicon.href = '/assets/images/landingpage/UkrainianGirl-Square.png';
     if (this.isRead === 'N') {
       localStorage.setItem('isRead', 'Y');
       this.sharedService.isNotify = false;

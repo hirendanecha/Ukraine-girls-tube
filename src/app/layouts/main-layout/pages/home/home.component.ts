@@ -122,7 +122,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     config.keyboard = false;
     config.pauseOnHover = false;
     const data = {
-      title: 'Organic-Home',
+      title: 'UkrainianGirls-Home',
       url: `${location.href}`,
       description: '',
     };
@@ -141,7 +141,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isNavigationEnd = true;
       });
       const data = {
-        title: 'Organic-Home',
+        title: 'UkrainianGirls-Home',
         url: `${location.href}`,
       };
       this.seoService.updateSeoMetaData(data);
@@ -633,7 +633,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!profile.profilePictures || profile.profilePictures.length === 0) {
       profile.profilePictures = [
         {
-          imageUrl: '/assets/images/landingpage/OD-default-profile.png',
+          imageUrl: '/assets/images/landingpage/UkrainianGirl-Square.png',
         },
       ];
     }

@@ -29,7 +29,7 @@ export class FreedomPageComponent {
 
     this.getPages();
     const data = {
-      title: 'Organic-Promote You!',
+      title: 'UkrainianGirls-Promote You!',
       url: `${location.href}`,
       description: '',
     };

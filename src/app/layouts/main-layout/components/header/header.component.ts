@@ -59,7 +59,7 @@ export class HeaderComponent {
         if (data?.profileId) {
           this.sharedService.isNotify = false;
           localStorage.setItem('isRead', data?.isRead);
-          this.originalFavicon.href = '/assets/images/landingpage/OD-default-profile.png';
+          this.originalFavicon.href = '/assets/images/landingpage/UkrainianGirl-Square.png';
         }
       });
     }
