@@ -29,7 +29,7 @@ export class NotificationsModalComponent implements AfterViewInit {
     this.socketService.readNotification({ profileId }, (data) => { });
   }
 
-  readUnreadNotification(postId: string, notification: any = {}): void {
+  readUnreadNotification(notification: any = {}): void {
     this.customerService
       .readUnreadNotification(notification.id, 'Y')
       .subscribe({
@@ -38,7 +38,7 @@ export class NotificationsModalComponent implements AfterViewInit {
           if (type.includes(notification?.actionType)) {
             this.router.navigate([`profile-chats`]);
           } else {
-            this.router.navigate([`post/${postId}`]);
+            this.router.navigate([`post/${notification.postId}`]);
           }
           // window.open(`post/${postId}`.toString(), '_blank')
           this.closeModal();
