@@ -88,7 +88,7 @@ export function app(): express.Express {
           description:
             'Meet and Talk Face to Face with Beautiful Ukrainian Girls!',
           image:
-            'https://www.ukrainiangirls.tube/assets/images/landingpage/UkrainianGirl-Square.png',
+            'https://www.ukrainiangirls.tube/assets/images/landingpage/ukraine-girl-banner.png',
           site: 'https://www.ukrainiangirls.tube/',
           url: 'https://www.ukrainiangirls.tube' + params,
           keywords: 'UkrainianGirls.tube',
@@ -160,7 +160,7 @@ export function app(): express.Express {
               post?.thumbfilename ||
               post?.metaimage ||
               post?.imageUrl ||
-              'https://www.ukrainiangirls.tube/assets/images/landingpage/UkrainianGirl-Square.png',
+              'https://www.ukrainiangirls.tube/assets/images/landingpage/ukraine-girl-banner.png',
           };
           seo.title = talent.name;
           seo.description = strip_html_tags(talent.description);
