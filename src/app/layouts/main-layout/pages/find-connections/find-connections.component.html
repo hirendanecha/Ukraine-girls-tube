@@ -8,7 +8,7 @@
   </div>
 </ng-container> -->
 
-<ng-container *ngIf="profileList.length">
+<ng-container *ngIf="profileList.length else noConnectionFound">
   <div class="connection-slider rounded-4">
     <ngb-carousel
       [showNavigationIndicators]="false"
@@ -226,3 +226,6 @@
     <p class="text-start mt-5">{{ profileList[currentIndex]?.idealDate }}</p>
   </div> -->
 </ng-container>
+<ng-template #noConnectionFound>
+  <h2 class="text-center">No connection available!</h2>
+</ng-template>

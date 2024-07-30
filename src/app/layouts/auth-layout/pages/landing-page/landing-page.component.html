@@ -38,14 +38,16 @@
   </div>
   <div (click)="closeMenu()">
     <div class="d-flex flex-column py-10" [ngClass]="!isInnerWidthSmall || (!isLogin && !isRegister) ? 'custom-height' : ''">
-      <div class="container">
-        <div class="main-banner banner-text p-2 p-sm-4 col-md-6" *ngIf="!isLogin && !isRegister">
-          <span class="d-flex flex-column align-items-center">
-            <h1 class="my-2 text-s">UkrainianGirls.tube</h1>
-            <p class="c-fonts my-3 mb-0">Find unvaccinated singles worldwide within a social setting
-              complete with optional video chat</p>
-          </span>
-        </div>
+      <div class="offset-md-1 col-md-6 banner-text" *ngIf="!isLogin && !isRegister">
+        <span class="text-left">
+          <h1 class="text-white text-s">UkrainianGirls.tube</h1>
+        </span>
+        <span class="text-white c-fonts text-start mt-4">
+          Meet and Talk Face to Face with Beautiful Ukrainian Girls!
+        </span>
+        <span class="text-white c-fonts text-start mt-4">
+          Talk them out of their clothes talk them into marriage!
+        </span>
       </div>
       <ng-container *ngIf="isLogin">
         <app-login></app-login>
