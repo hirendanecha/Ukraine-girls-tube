@@ -161,7 +161,7 @@ export class ProfileChartsComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(ConfirmationModalComponent, {
           centered: true,
         });
-        modalRef.componentInstance.title = 'Add freedom chats on home';
+        modalRef.componentInstance.title = 'Add chats on home';
         modalRef.componentInstance.confirmButtonLabel = 'Do not display again';
         modalRef.componentInstance.cancelButtonLabel = 'Close';
         modalRef.componentInstance.message =

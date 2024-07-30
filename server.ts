@@ -86,7 +86,7 @@ export function app(): express.Express {
         var seo: any = {
           title: 'UkrainianGirls.tube',
           description:
-            'Find like minded male or female unvaccinated UkrainianGirls humans!',
+            'Meet and Talk Face to Face with Beautiful Ukrainian Girls!',
           image:
             'https://www.ukrainiangirls.tube/assets/images/landingpage/UkrainianGirl-Square.png',
           site: 'https://www.ukrainiangirls.tube/',
