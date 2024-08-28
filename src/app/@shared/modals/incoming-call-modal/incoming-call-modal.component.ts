@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { SoundControlService } from '../../services/sound-control.service';
 import { CustomerService } from '../../services/customer.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-incoming-call-modal',
@@ -42,7 +43,8 @@ export class IncomingcallModalComponent
     private soundControlService: SoundControlService,
     private router: Router,
     private modalService: NgbModal,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private sharedService: SharedService
   ) {
     this.profileId = +localStorage.getItem('profileId');
     this.isOnCall = this.router.url.includes('/dating-call/') || false;
@@ -58,14 +60,22 @@ export class IncomingcallModalComponent
           this.sound?.stop();
         }
       });
-    const SoundOct = JSON.parse(
-      localStorage.getItem('soundPreferences')
-    )?.callSoundEnabled;
-    if (SoundOct !== 'N') {
-      if (this.sound) {
-        this.sound?.play();
+    // const SoundOct = JSON.parse(
+    //   localStorage.getItem('soundPreferences')
+    // )?.callSoundEnabled;
+    // if (SoundOct !== 'N') {
+    //   if (this.sound) {
+    //     this.sound?.play();
+    //   }
+    // }
+    this.sharedService.loginUserInfo.subscribe((user) => {
+      const callNotificationSound = user.callNotificationSound;
+      if (callNotificationSound === 'Y') {
+        if (this.sound) {
+          this.sound?.play();
+        }
       }
-    }
+    });
     if (!this.hangUpTimeout) {
       this.hangUpTimeout = setTimeout(() => {
         this.hangUpCall(false, '');

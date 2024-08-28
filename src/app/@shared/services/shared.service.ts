@@ -21,6 +21,8 @@ export class SharedService {
   onlineUserList: any = [];
   private isRoomCreatedSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+  loginUserInfo = new BehaviorSubject<any>(null);
+  loggedInUser$ = this.loginUserInfo.asObservable();
 
   constructor(
     public modalService: NgbModal,
@@ -84,6 +86,7 @@ export class SharedService {
           if (data) {
             this.userData = data;
             localStorage.setItem('userData', JSON.stringify(this.userData));
+            this.getLoginUserDetails(this.userData);
           }
         },
         error: (error) => {
@@ -171,5 +174,9 @@ export class SharedService {
   // Method to get an Observable that emits isRoomCreated changes
   getIsRoomCreatedObservable(): Observable<boolean> {
     return this.isRoomCreatedSubject.asObservable();
+  }
+
+  getLoginUserDetails(userData: any = {}) {
+    this.loginUserInfo.next(userData);
   }
 }
